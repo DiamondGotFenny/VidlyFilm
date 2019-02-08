@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import _ from "lodash";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 
 class Pagination extends Component {
   render() {
@@ -15,7 +14,13 @@ class Pagination extends Component {
       <nav aria-label="Page navigation example">
         <ul className="pagination justify-content-center">
           <li className="page-item">
-            <a className="page-link" to="#" aria-label="Previous">
+            <a
+              className="page-link"
+              onClick={() => {
+                if (currentPage > 1) onPageChange(currentPage - 1);
+              }}
+              aria-label="Previous"
+            >
               <span aria-hidden="true">&laquo;</span>
             </a>
           </li>
@@ -33,7 +38,15 @@ class Pagination extends Component {
           ))}
 
           <li className="page-item">
-            <a className="page-link" to="#" aria-label="Next">
+            <a
+              className="page-link"
+              onClick={() =>
+                currentPage + 1 <= pagesCount
+                  ? onPageChange(currentPage + 1)
+                  : null
+              }
+              aria-label="Next"
+            >
               <span aria-hidden="true">&raquo;</span>
             </a>
           </li>
@@ -51,3 +64,4 @@ Pagination.propTypes = {
 };
 
 export default Pagination;
+
